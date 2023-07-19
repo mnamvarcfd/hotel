@@ -1,5 +1,5 @@
 import React from "react";
-import welcomPhoto from "./data/welcom_photo.json"
+import welcomPhoto from "./data/WelcomPhotoes.json"
 
 const Welcome = () => {
     return(

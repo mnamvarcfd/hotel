@@ -1,5 +1,5 @@
 import React from "react";
-import menuLinksData from "./data/menu_links.json"
+import menuLinksData from "./data/MenuLinks.json"
 
 const Header = () => {
     return (
