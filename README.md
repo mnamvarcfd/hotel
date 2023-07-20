@@ -1,2 +1,2 @@
-# Hotel reservation web application
-This is a project to use react, AWS, API
+# Hotel web application
+In this project react, AWS amplify, and API gateway is used to develop a serverless App.
