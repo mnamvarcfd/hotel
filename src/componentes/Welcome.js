@@ -1,7 +1,33 @@
-import React from "react";
-import welcomPhoto from "./data/WelcomPhotoes.json"
+import React, { useState, useEffect } from "react";
+
+// Custom hook to load menu links data
+const useData = (rout) => {
+
+  const [data, setData] = useState([]);
+
+  const loadData = async () => {
+    const url = "https://gomardk0q5.execute-api.ca-central-1.amazonaws.com/production/";
+    const res = await fetch(url + rout);
+    let jsonData = await res.json();
+    setData(jsonData);
+  };
+
+  useEffect(() => {
+    loadData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return data;
+};
+
 
 const Welcome = () => {
+
+    const rout = "WelcomPhotoes";
+
+    // Using the custom hook to get menu links data
+    const welcomPhoto = useData(rout);
+
     return(
         <div className="scene" id="welcome">
           <article className="content">
@@ -12,11 +38,6 @@ const Welcome = () => {
                   <img src={link.src} alt={link.alt}/>
                 )
               }
-              {/* <img src="https://landonhotel.com/images/hotel/intro_room.jpg" alt="Intro Gallery Room Sample Pictures"/> */}
-              {/* <img src="https://landonhotel.com/images/hotel/intro_pool.jpg" alt="Intro Gallery Pool Sample Pictures"/> */}
-              {/* <img src="https://landonhotel.com/images/hotel/intro_dining.jpg" alt="Intro Gallery Dining Sample Pictures"/> */}
-              {/* <img src="https://landonhotel.com/images/hotel/intro_attractions.jpg" alt="Intro Gallery Attractions Sample Pictures"/> */}
-              {/* <img className="hidesm" src="https://landonhotel.com/images/hotel/intro_wedding.jpg" alt="Intro Gallery Dining Sample Pictures"/> */}
             </div>
             
             <h1>Welcome to the Landon&nbsp;Hotel.</h1>

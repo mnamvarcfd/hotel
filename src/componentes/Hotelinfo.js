@@ -1,8 +1,38 @@
-import React from "react";
-import ServicesData from "./data/Services.json"
-import AccessData from "./data/Access.json"
+import React, { useState, useEffect } from "react";
+
+// Custom hook to load menu links data
+const useData = (rout) => {
+
+  const [data, setData] = useState([]);
+
+  const loadData = async () => {
+    const url = "https://gomardk0q5.execute-api.ca-central-1.amazonaws.com/production/";
+    const res = await fetch(url + rout);
+    let jsonData = await res.json();
+    setData(jsonData);
+  };
+
+  useEffect(() => {
+    loadData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return data;
+};
+
+
+
 
 const Hotelinfo = () => {
+
+    const routAccessData = "access";
+    // Using the custom hook to get menu links data
+    const AccessData = useData(routAccessData);
+
+    const routServicesData = "services";
+    // Using the custom hook to get menu links data
+    const ServicesData = useData(routServicesData);
+
     return(
       <div className="scene" id="hotelinfo">
       <article className="heading">
@@ -29,21 +59,6 @@ const Hotelinfo = () => {
               <li>{servic.name}</li>
             )
           }
-            {/* <li>Indoor pool</li>
-            <li>24-hour fitness center</li>
-            <li>Massage therapy</li>
-            <li>Full service spa</li>
-            <li>In-room jacuzzi tubs</li>
-            <li>Rooftop café  &amp; smoothie bar</li>
-            <li>Coffee bar  &amp; pastry shop</li>
-            <li>Traditional continental breakfast</li>
-            <li>24-hour concierge service</li>
-            <li>Business center</li>
-            <li>Complimentary wireless service</li>
-            <li>Laundry &amp; dry cleaning service</li>
-            <li>Daily paper</li>
-            <li>Certified "green" hotel</li>
-            <li>Pet-friendly rooms  &amp; common areas</li> */}
           </ul>
         </section>
         <section className="checklist" id="accessibility">
@@ -55,19 +70,6 @@ const Hotelinfo = () => {
               <li>{item.name}</li>
               )
             }
-            {/* <li>Grab bars on tub walls</li>
-            <li>Shower chairs</li>
-            <li>Hand held shower sprayers</li>
-            <li>Higher toilets &amp; toilet modifiers</li>
-            <li>Lower sink faucet handles</li>
-            <li>Wheelchair clearance under sinks &amp; vanity</li>
-            <li>Lower racks in closet</li>
-            <li>TDD machines</li>
-            <li>Telephone light signalers  &amp; smoke alarms</li>
-            <li>Telephone amplification handsets</li>
-            <li>Closed captioned television converters</li>
-            <li>Vibrating alarm clocks</li>
-            <li>Telephones with volume control</li> */}
           </ul>
         </section>
       </article>

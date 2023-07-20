@@ -1,0 +1,24 @@
+import { useState, useEffect } from "react";
+
+// Custom hook to load menu links data
+const useData = (rout) => {
+
+  const [data, setData] = useState([]);
+
+  const loadData = async () => {
+    const url = "https://gomardk0q5.execute-api.ca-central-1.amazonaws.com/production/";
+    const res = await fetch(url + rout);
+    let jsonData = await res.json();
+    setData(jsonData);
+  };
+
+  useEffect(() => {
+    loadData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return data;
+};
+
+
+export default useData;
